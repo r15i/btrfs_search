@@ -255,7 +255,8 @@ class InotifyDaemon:
             "database_path": "file_index.db",
             "exclude_patterns": [
                 "*.tmp", "*.swp", "*~", ".git/*", "__pycache__/*", 
-                "*.pyc", ".cache/*", ".local/share/Trash/*"
+                "*.pyc", ".cache/*", ".local/share/Trash/*",
+                "*.db", "*.db-wal", "*.db-shm", "inotify_daemon.log"
             ],
             "max_depth": 10,
             "batch_size": 100,
