@@ -108,10 +108,27 @@
 
             const messageElement = warning.querySelector("div:nth-child(2)");
             if (messageElement) {
-              if (voteCount > 0) {
-                messageElement.innerHTML = `This site isn't on the trusted list.<br>However, <strong>${voteCount} user(s)</strong> have marked it as safe.<br>Please be certain before entering credentials.`;
+              const safeVoteCount = Number(voteCount) || 0;
+              if (safeVoteCount > 0) {
+                messageElement.textContent = '';
+                const frag = document.createDocumentFragment();
+                frag.appendChild(document.createTextNode("This site isn't on the trusted list."));
+                frag.appendChild(document.createElement('br'));
+                frag.appendChild(document.createTextNode("However, "));
+                const strong = document.createElement('strong');
+                strong.textContent = `${safeVoteCount} user(s)`;
+                frag.appendChild(strong);
+                frag.appendChild(document.createTextNode(" have marked it as safe."));
+                frag.appendChild(document.createElement('br'));
+                frag.appendChild(document.createTextNode("Please be certain before entering credentials."));
+                messageElement.appendChild(frag);
               } else {
-                messageElement.innerHTML = `This site isn't on the trusted list, and no users have marked it as safe.<br>We strongly advise you not to enter any passwords.`;
+                messageElement.textContent = '';
+                const frag = document.createDocumentFragment();
+                frag.appendChild(document.createTextNode("This site isn't on the trusted list, and no users have marked it as safe."));
+                frag.appendChild(document.createElement('br'));
+                frag.appendChild(document.createTextNode("We strongly advise you not to enter any passwords."));
+                messageElement.appendChild(frag);
               }
             }
 
